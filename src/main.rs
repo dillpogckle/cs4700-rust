@@ -5,10 +5,15 @@ use std::fmt;
 */
 fn main() {
     // run the tests
+    println!("\nTesting pair_up:");
     test_pair_up();
+    println!("\nTesting factorial_numbers:");
     test_factorial_numbers();
+    println!("\nTesting make_element_generator:");
     test_make_element_generator();
+    println!("\nTesting run_length_encoding:");
     test_run_length_encoding();
+    println!("\nTesting forms_chain:");
     test_forms_chain();
 }
 
@@ -18,12 +23,27 @@ fn make_element_generator<T>(list: Vec<T>) -> impl FnMut() -> Option<T> {
 }
 
 fn pair_up<T: Copy>(list: &Vec<T>) -> Vec<Vec<T>> {
-    vec![]
+    let mut result: Vec<Vec<T>> = vec![];
+    let len = list.len();
+    for i in 0..len/2 {
+        let pair = vec![list[2*i], list[2*i + 1]];
+        result.push(pair);
+    }
+    if len % 2 == 1 {
+        result.push(vec![list[len - 1]]);
+    }
+    result
 }
 
 
 fn factorial_numbers(n: i32) -> Vec<i32> {
-    vec![]
+    let mut factorials = vec![];
+    let mut current_factorial = 1;
+    for i in 1..=n {
+        current_factorial *= i;
+        factorials.push(current_factorial);
+    }
+    factorials
 }
 
 fn run_length_encoding<T: Ord + Copy>(list: &Vec<T>) -> Vec<(i32,T)> {
