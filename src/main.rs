@@ -18,17 +18,22 @@ fn main() {
 }
 
 fn make_element_generator<T>(list: Vec<T>) -> impl FnMut() -> Option<T> {
+    // change the list into an iterator and return a closure that calls next on the iterator
     let mut iterator = list.into_iter();
     move || iterator.next()
 }
 
 fn pair_up<T: Copy>(list: &Vec<T>) -> Vec<Vec<T>> {
+    // create a new vector to hold the pairs and get list length
     let mut result: Vec<Vec<T>> = vec![];
     let len = list.len();
+
+    // iterate through the list in steps of 2 and create pairs
     for i in 0..len/2 {
         let pair = vec![list[2*i], list[2*i + 1]];
         result.push(pair);
     }
+    // handle odd length list
     if len % 2 == 1 {
         result.push(vec![list[len - 1]]);
     }
@@ -37,8 +42,11 @@ fn pair_up<T: Copy>(list: &Vec<T>) -> Vec<Vec<T>> {
 
 
 fn factorial_numbers(n: i32) -> Vec<i32> {
+    // create a vector to hold the factorials and a variable to keep track of the current factorial value
     let mut factorials = vec![];
     let mut current_factorial = 1;
+
+    // calculate factorials from 1 to n and store them in the vector
     for i in 1..=n {
         current_factorial *= i;
         factorials.push(current_factorial);
@@ -47,12 +55,16 @@ fn factorial_numbers(n: i32) -> Vec<i32> {
 }
 
 fn run_length_encoding<T: Ord + Copy>(list: &Vec<T>) -> Vec<(i32,T)> {
+    // create a vector to hold the result and handle the case of an empty list
     let mut result: Vec<(i32, T)> = vec![];
     if list.is_empty() {
         return result;
     }
+
+    // iterate through the list and count consecutive occurrences of each element
     let mut count = 1;
     let mut current_element = list[0];
+    // skip first element because it is already counted
     for &item in list.iter().skip(1) {
         if item == current_element {
             count += 1;
@@ -62,6 +74,7 @@ fn run_length_encoding<T: Ord + Copy>(list: &Vec<T>) -> Vec<(i32,T)> {
             count = 1;
         }
     }
+    // push the last counted element to the result and return
     result.push((count, current_element));
     result
 }
