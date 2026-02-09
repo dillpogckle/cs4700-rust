@@ -1,10 +1,11 @@
-use std::fmt;
+use std::fmt; // I left this not sure if the TA would need it for something
 
 /*
    Execution starts here
 */
 fn main() {
     // run the tests
+    // I added spacing between the tests to make the output easier to read
     println!("\nTesting pair_up:");
     test_pair_up();
     println!("\nTesting factorial_numbers:");
