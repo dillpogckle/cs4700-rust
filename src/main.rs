@@ -53,12 +53,12 @@ fn run_length_encoding<T: Ord + Copy>(list: &Vec<T>) -> Vec<(i32,T)> {
     }
     let mut count = 1;
     let mut current_element = list[0];
-    for i in 1..list.len() {
-        if list[i] == current_element {
+    for &item in list.iter().skip(1) {
+        if item == current_element {
             count += 1;
         } else {
             result.push((count, current_element));
-            current_element = list[i];
+            current_element = item;
             count = 1;
         }
     }
