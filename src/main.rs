@@ -47,7 +47,23 @@ fn factorial_numbers(n: i32) -> Vec<i32> {
 }
 
 fn run_length_encoding<T: Ord + Copy>(list: &Vec<T>) -> Vec<(i32,T)> {
-    vec![]
+    let mut result: Vec<(i32, T)> = vec![];
+    if list.is_empty() {
+        return result;
+    }
+    let mut count = 1;
+    let mut current_element = list[0];
+    for i in 1..list.len() {
+        if list[i] == current_element {
+            count += 1;
+        } else {
+            result.push((count, current_element));
+            current_element = list[i];
+            count = 1;
+        }
+    }
+    result.push((count, current_element));
+    result
 }
 
 fn forms_chain<T: Ord>(list: &[Vec<T>]) -> bool {
