@@ -80,7 +80,20 @@ fn run_length_encoding<T: Ord + Copy>(list: &Vec<T>) -> Vec<(i32,T)> {
 }
 
 fn forms_chain<T: Ord>(list: &[Vec<T>]) -> bool {
-  false
+    // handle the case of an empty list or a list with only one sublist
+    if list.len() < 2 {
+        return true;
+    }
+    // iterate through the list and check if the last element of the current sublist matches the first element of the next sublist
+    for i in 0..list.len() - 1 {
+        let last_of_current = list[i].last();
+        let first_of_next = list[i + 1].first();
+        if last_of_current != first_of_next {
+            return false;
+        }
+    }
+    // if all pairs of sublists form a chain, return true
+    true
 }
 
 /*
