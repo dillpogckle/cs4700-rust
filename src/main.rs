@@ -18,8 +18,8 @@ fn main() {
 }
 
 fn make_element_generator<T>(list: Vec<T>) -> impl FnMut() -> Option<T> {
-
-    || None
+    let mut iterator = list.into_iter();
+    move || iterator.next()
 }
 
 fn pair_up<T: Copy>(list: &Vec<T>) -> Vec<Vec<T>> {
